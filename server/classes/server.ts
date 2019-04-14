@@ -29,13 +29,22 @@ export default class Server {
     private listenSockets() {
         console.log('Listening sockets');
         this.io.on('connection', client => {
-            console.log('Cliente conectado');
+            //console.log('Cliente conectado');
+            
+            //console.log(client.id); // --> id del socket
+
+            // conectar cliente
+            socket.conectarCliente(client);
+            
+            // configurar usuario
+            socket.configurarUsuario(client, this.io);
 
             // Mensajes
-            socket.message(client,this.io);
+            socket.message(client, this.io);
 
             // Desconectar
             socket.disconnectClient(client);
+
         });
     }
 
